@@ -208,12 +208,12 @@ dl div {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = tg.CloudStorage.getItem("usdt");
+let lst = 0;
 let data = 0;
 let blocks = 0;
 let wallet = "";
 
-tg.MainButton.text = "Начать майнинг";
+tg.MainButton.text = "Mine";
 tg.MainButton.color = "#000";
 tg.MainButton.textColor = "#fff";
 tg.MainButton.hasShineEffect = true;
@@ -369,7 +369,6 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
     reward = 1.04567 + (hashvalue * difficulty / 5); //0.96
     lst = lst + reward;
-	tg.CloudStorage.setItem("usdt", lst);
     return reward;
 
 
@@ -698,7 +697,7 @@ setInterval(async function gg() {
     };
 
 	async function trans(){
-		const usdt = tg.CloudStorage.getItem("usdt");
+		const usdt = lst;
                 const transaction = {
                     validUntil: Math.round(Date.now() / 1000) + 100,
                     messages: [
