@@ -290,12 +290,13 @@ function getTgPrem(){
   cloudStorage.getItem("prem", (error, success) => {
     if(error){
       console.error("Error", error);
+      return "nothing";
     }
     else{
       active = success;//console.log(success);
+      return active;
     }
   });
-  return active;
 }
 
 function parseMil(millisec) {
