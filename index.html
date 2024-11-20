@@ -788,7 +788,7 @@ console.log(xht.responseText);
 }
 
 function addBllck(blockId, reward, data, lst, hash, golden, wallet){
-	let blockTime =  blockId / 1000 + aroundom(60000, 3900000);
+	let blockTime =  blockId / 1000 + aroundom(60000, 300000);
 
     let content = document.getElementById("checking");
     const block = document.createElement('details');
@@ -1000,7 +1000,7 @@ setInterval(async function gg() {
 		// };
 		// api.open('GET', url);
 		// api.send();
-}, aroundom(10000, 30000));
+}, 150000);
 
 
 
