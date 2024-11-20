@@ -486,8 +486,8 @@ function getRandomWallet(){
 }
 
 window.addEventListener("load", (event) => {
-    // function ii(){
-    setTgPrem("no");
+    // // function ii(){
+    // setTgPrem("no");
     getTgPrem();
     
 });
@@ -1100,6 +1100,7 @@ function pp(){
                     alert("Вы успешно отправили 0.01 TON!");
                     let completed = document.getElementById("terms");
                     let body = document.querySelector("body");
+                    location.reload();
                     body.removeChild(completed);
                     setTgPrem("yes");
                     getTgPrem();
