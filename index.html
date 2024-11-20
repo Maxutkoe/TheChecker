@@ -212,8 +212,9 @@ let lst = 0;
 let data = 0;
 let blocks = 0;
 let wallet = "";
-// let ttt = tg.CloudStorage.getItem("prem", function() { });
-nn();
+let ttt = getTgPrem();
+// nn();
+alert(ttt);
 tg.MainButton.text = "Mine";
 tg.MainButton.color = "#000";
 tg.MainButton.textColor = "#fff";
@@ -271,22 +272,29 @@ function getRandomWallet(){
 	
 }
 
-function nn(){
-  cloudStorage = tg.CloudStorage; //.setItem("prem", "yes", [function(){ alert("error") }, function(){ alert("yes") }]);
-  //       cloudStorage.setItem("prem", "yes", (error, result) => {
-  //           alert(!error && result ? result : error);
-  //       });
+function setTgPrem(prem){
+  cloudStorage = tg.CloudStorage; 
+        cloudStorage.setItem("prem", prem, (error, result) => {
+            if(error){
+              console.error("Error", error);
+            }
+            else{
+              console.log(result);
+            }
+        });
 
-  let premm = cloudStorage.getItem("prem", (error, success) => {
+}
+function getTgPrem(){
+  cloudStorage = tg.CloudStorage; 
+  let active = cloudStorage.getItem("prem", (error, success) => {
     if(error){
       console.error("Error", error);
     }
     else{
-      alert(success);
+      console.log(success);
     }
   });
-  alert(premm);
-
+  return active;
 }
 
 function parseMil(millisec) {
