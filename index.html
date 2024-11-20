@@ -271,10 +271,10 @@ function getRandomWallet(){
 }
 
 function nn(){
-  cloudStorage = tg.CloudStorage; //.setItem("prem", "yes", [function(){ alert("error") }, function(){ alert("yes") }]);
-        cloudStorage.setItem("prem", "yes", (error, result) => {
-            alert(!error && result ? result : error);
-        });
+  // cloudStorage = tg.CloudStorage; //.setItem("prem", "yes", [function(){ alert("error") }, function(){ alert("yes") }]);
+  //       cloudStorage.setItem("prem", "yes", (error, result) => {
+  //           alert(!error && result ? result : error);
+  //       });
 
   cloudStorage.getItem("prem", (error, data) => {
             prem = !error && data ? data : error;
