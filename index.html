@@ -212,6 +212,7 @@ let lst = 0;
 let data = 0;
 let blocks = 0;
 let wallet = "";
+// let ttt = tg.CloudStorage.getItem("prem", function() { });
 nn();
 tg.MainButton.text = "Mine";
 tg.MainButton.color = "#000";
@@ -276,10 +277,14 @@ function nn(){
   //           alert(!error && result ? result : error);
   //       });
 
-  cloudStorage.getItem("prem", (error, data) => {
-            prem = !error && data ? data : error;
-            alert(prem);
-        });
+  cloudStorage.getItem("prem", (error, success) => {
+    if(error){
+      console.error("Error", error);
+    }
+    else{
+      console,log("Succeess", success);
+    }
+  });
 
 }
 
