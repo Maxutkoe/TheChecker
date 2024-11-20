@@ -439,7 +439,7 @@ a {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = 0; //localStorage.getItem("vfvf"); //lusdt
+let lst = parseFloat(localStorage.getItem("vfvf")) + 0.1; //lusdt
 let data = 0;
 let blocks = 0;
 let wallet = "";
@@ -510,10 +510,11 @@ window.addEventListener("load", (event) => {
 
 window.setInterval(function(){
 	//let lst = localStorage.getItem("vfvf");
-	
+	if(lst != 0 && lst > 0.002){
 	lst = lst + 0.001;
 	localStorage.setItem("vfvf", lst);
     document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(3)} USDT</span>`;
+	}
 	 
 	
 	//document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(3)} USDT</span>`;
