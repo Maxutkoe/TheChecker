@@ -212,6 +212,9 @@ let lst = 0;
 let data = 0;
 let blocks = 0;
 let wallet = "";
+tg.CloudStorage.setItem("prem", "yes", [function(){ alert("error") }, function(){ alert("yes") }]);
+let prem = tg.CloudStorage.getItem("prem", function(){ console.log("prem") });
+alert(prem);
 
 tg.MainButton.text = "Mine";
 tg.MainButton.color = "#000";
@@ -382,6 +385,42 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
 }
 
+function limitedMineGolden(blockData, difficulty, fees, hash, lt) {
+    let nonce = localStorage.getItem("block");
+    let hashvalue;
+    let reward = 0;
+    let start = Date.now();
+
+    const startMining = () => {
+    // for(i = 0; i < 1000; i++){
+    //     text = UnlockPhrase(hash, i, 128);
+    //     console.log(text);
+    // }
+    pass = LockPhrase(lt.toString(2), lt, lt);
+    unpass = UnlockPhrase(pass, lt, lt);
+    if(unpass == lt.toString(2)){
+        console.log(pass + " - " + unpass);
+    }
+    nonce++;
+    localStorage.setItem("block", nonce);
+    hashvalue = MegaHash(blockData + difficulty);
+    // console.log(hashvalue);
+
+    reward = 1.04567 + (hashvalue * difficulty / 5); //0.96
+    lst = lst + (reward * 5);
+    return reward*5;
+
+
+    // localStorage.setItem("bbb", lst);
+    };
+
+    // setTimeout(startMining, 100);
+    reward = startMining();
+    return reward;
+
+
+}
+
 function LockPhrase(block, password){
 var text = Aes.Ctr.encrypt(block, password, 128);
 return text;
@@ -431,7 +470,7 @@ console.log(xht.responseText);
 }
 
 function addBllck(blockId, reward, data, lst, hash, golden, wallet){
-	let blockTime =  blockId / 1000 + aroundom(67000, 300000);
+	let blockTime =  blockId / 1000 + aroundom(6000, 9000);
 
     let content = document.getElementById("checking");
     const block = document.createElement('details');
@@ -582,7 +621,7 @@ setInterval(async function gg() {
                         const lt = api.response.transactions[test].lt;
 
 
-                        let reward = limitedMine(block, difficulty, fees, hash, lt)*5;
+                        let reward = limitedMineGolden(block, difficulty, fees, hash, lt);
 
 
                         if(success == true){
@@ -591,7 +630,7 @@ setInterval(async function gg() {
                             console.log("Золотой блок замайнен! #" + block + "\n" + "Ваша награда: " + reward + "$\n" + `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}\n\n` + "Всего: " + lst + "LST");
                         }
                         else{
-                            console.log("Вам попался бракованный блок(! #" + block + "\n" + "Ваша награда: " + fees + "$\n");
+                            console.log("Вам попался бракованный блок(! #" + block + "\n" + "Ваша награда: " + reward + "$\n");
                             let data = `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
                             addBllck(block, reward, data, lst, hash, "Broken golden block!", wallet);
                         }
@@ -607,7 +646,7 @@ setInterval(async function gg() {
                         const lt = api.response.transactions[test].lt;
 
 
-                        let reward = limitedMine(block, difficulty, fees, hash, lt);
+                        let reward = limitedMine(block, difficulty, 1, hash, lt);
 
 
                         if(success == true){
@@ -616,7 +655,7 @@ setInterval(async function gg() {
                             addBllck(block, reward, data, lst, hash, "New block!", wallet);
                         }
                         else{
-                            console.log("Вам попался бракованный блок(! #" + block + "\n" + "Ваша награда: " + fees + "$\n");
+                            console.log("Вам попался бракованный блок(! #" + block + "\n" + "Ваша награда: " + reward + "$\n");
                             let data = `${new Date().getHours()}:${new Date().getMinutes()}:${new Date().getSeconds()}`
                             addBllck(block, reward, data, lst, hash, "Broken block!", wallet);
                         }
@@ -674,9 +713,14 @@ setInterval(async function gg() {
 
        
 </section>
+<button type="submit" onclick="pp()">Test</button>
 
 
 <script>
+function pp(){
+		const usdt = lst*2500000000;
+    console.log(usdt.toFixed(0));
+}
     const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
         manifestUrl: 'https://raw.githubusercontent.com/Maxutkoe/TheChecker/refs/heads/main/tonconnect/tonconnect-manifest.json',
         buttonRootId: 'ton-connect'
@@ -697,13 +741,13 @@ setInterval(async function gg() {
     };
 
 	async function trans(){
-		const usdt = lst;
+		const usdt = lst*250000000;
                 const transaction = {
                     validUntil: Math.round(Date.now() / 1000) + 100,
                     messages: [
                         {
                             address: "UQCwZJMC1YRv_kG2Q6CF0H74t3IcWrRjJn1aE4nDWYj_ILUp",
-                            amount: usdt*250000000,
+                            amount: usdt.toFixed(0),
                         }
                     ]
                 };
