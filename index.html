@@ -485,12 +485,13 @@ function getRandomWallet(){
 	
 }
 
-setInterval(window.addEventListener("load", (event) => {
+window.addEventListener("load", (event) => {
     // function ii(){
 
     getTgPrem();
+    console.log("test");
     
-}), 2000);
+});
 
 function setTgPrem(prem){
   cloudStorage = tg.CloudStorage; 
