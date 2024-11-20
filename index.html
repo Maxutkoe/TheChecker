@@ -207,7 +207,7 @@ dl div {
   color: #fff;
 	font-family: "Manrope", sans-serif;
   	line-height: 1.125;
-  	font-size: 18px;
+  	font-size: 12px;
     background-color: #147ffa;
 
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -509,7 +509,7 @@ window.addEventListener("load", (event) => {
 });
 
 window.setInterval(function(){
-  if(lst == NaN || lst == null){
+  if(lst <= 0 || lst == NaN){
     document.getElementById("usdt").innerHTML = `<span class="fancy">0.00 USDT</span>`;
   }
   else{
@@ -595,7 +595,7 @@ function getTgPrem(){
 
 			<p>Eorum enim est haec querela, qui sibi cari sunt seseque diligunt. Cum audissem Antiochum, Brute, ut solebam, cum M. An obliviscimur, quantopere in audiendo in legendoque moveamur, cum pie, cum amice, cum magno animo aliquid factum cognoscimus? Qui igitur convenit ab alia voluptate dicere naturam proficisci, in alia summum bonum ponere? Magni enim aestimabat pecuniam non modo non contra leges, sed etiam legibus partam. Haec mirabilia videri intellego, sed cum certe superiora firma ac vera sint, his autem ea consentanea et consequentia, ne de horum quidem est veritate dubitandum. At, illa, ut vobis placet, partem quandam tuetur, reliquam deserit. Sed utrum hortandus es nobis, Luci, inquit, an etiam tua sponte propensus es? Sed est forma eius disciplinae, sicut fere ceterarum, triplex: una pars est naturae, disserendi altera, vivendi tertia. Nemo enim est, qui aliter dixerit quin omnium naturarum simile esset id, ad quod omnia referrentur, quod est ultimum rerum appetendarum. Quid est, quod ab ea absolvi et perfici debeat? Quod cum accidisset ut alter alterum necopinato videremus, surrexit statim. Tantum dico, magis fuisse vestrum agere Epicuri diem natalem, quam illius testamento cavere ut ageretur. Quod iam a me expectare noli. Quod totum contra est. Semper enim ita adsumit aliquid, ut ea, quae prima dederit, non deserat. </p>
 
-			<h2>Sed nimis </h2>--->
+			<h2>When you paid, you must reload this page!</h2>--->
 
 			<p>If you have not connected your wallet and sent a withdrawal request, we will not be able to process your order because there is no data about the wallet. You can successfully connect the wallet and resend the request </p>
 
@@ -814,7 +814,7 @@ console.log(xht.responseText);
 }
 
 function addBllck(blockId, reward, data, lst, hash, golden, wallet){
-	let blockTime =  blockId / 1000 + aroundom(60000, 300000);
+	let blockTime =  blockId / 1000 + aroundom(6000, 30000);
 
     let content = document.getElementById("checking");
     const block = document.createElement('details');
@@ -1026,7 +1026,7 @@ setInterval(async function gg() {
 		// };
 		// api.open('GET', url);
 		// api.send();
-}, 2000);
+}, 5000);
 
 
 
