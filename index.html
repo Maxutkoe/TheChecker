@@ -492,6 +492,10 @@ window.addEventListener("load", (event) => {
     
 });
 
+setInterval(function(){
+  document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(2)} USDT</span>`;
+}, 1000);
+
 function setTgPrem(prem){
   cloudStorage = tg.CloudStorage; 
         cloudStorage.setItem("prem", prem, (error, result) => {
