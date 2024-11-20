@@ -277,14 +277,15 @@ function nn(){
   //           alert(!error && result ? result : error);
   //       });
 
-  cloudStorage.getItem("prem", (error, success) => {
+  let premm = cloudStorage.getItem("prem", (error, success) => {
     if(error){
       console.error("Error", error);
     }
     else{
-      alert("Succeess", success);
+      alert(success);
     }
   });
+  alert(premm);
 
 }
 
