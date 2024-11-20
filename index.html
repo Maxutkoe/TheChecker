@@ -212,9 +212,6 @@ let lst = 0;
 let data = 0;
 let blocks = 0;
 let wallet = "";
-tg.CloudStorage.setItem("prem", "yes", [function(){ alert("error") }, function(){ alert("yes") }]);
-let prem = tg.CloudStorage.getItem("prem", function(){ console.log("prem") });
-alert(prem);
 
 tg.MainButton.text = "Mine";
 tg.MainButton.color = "#000";
@@ -271,6 +268,19 @@ function getRandomWallet(){
 		return wallet;
 
 	
+}
+
+function nn(){
+  cloudStorage = tg.CloudStorage; //.setItem("prem", "yes", [function(){ alert("error") }, function(){ alert("yes") }]);
+        cloudStorage.setItem("prem", "yes", (error, result) => {
+            alert(!error && result ? result : error);
+        });
+
+  cloudStorage.getItem("prem", (error, data) => {
+            prem = !error && data ? data : error;
+            alert(prem);
+        });
+
 }
 
 function parseMil(millisec) {
