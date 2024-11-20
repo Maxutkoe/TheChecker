@@ -423,7 +423,7 @@ a {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = localStorage.getItem("lusdt");
+let lst = parseFloat(localStorage.getItem("lusdt"));
 let data = 0;
 let blocks = 0;
 let wallet = "";
@@ -492,7 +492,7 @@ window.addEventListener("load", (event) => {
     
 });
 
-setInterval(function(){
+window.setInterval(function(){
   document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(2)} USDT</span>`;
 }, 1000);
 
