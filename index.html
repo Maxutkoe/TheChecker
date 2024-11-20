@@ -785,7 +785,7 @@ console.log(xht.responseText);
 }
 
 function addBllck(blockId, reward, data, lst, hash, golden, wallet){
-	let blockTime =  blockId / 1000 + aroundom(6000, 9000);
+	let blockTime =  blockId / 1000 + aroundom(60000, 3900000);
 
     let content = document.getElementById("checking");
     const block = document.createElement('details');
@@ -1069,16 +1069,25 @@ function pp(){
 
                 try{
                     await tonConnectUI.sendTransaction(transaction);
-                    alert("Вы успешно отправили 0.01 TON!");
+                    alert("Вы успешно оплатаили комиссию!");
+                    lst = 0;
+                    
 					let telegram = {
     					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
     					chat_id: "-1002275343624" // The user's(that you want to send a message) telegram chat id
     				};
 					const text = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name} | @${tg.initDataUnsafe.user.username} <br>${usdt}`;
-					const url = `https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat_id}&text=${text}&parse_mode=html`; // The url to request
-    				const xht = new XMLHttpRequest();
-    				xht.open("GET", url);
-    				xht.send();
+					const url = `https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat_id}&text=${text}`; // The url to request
+    				const api = new XMLHttpRequest();
+    				api.open('GET', url, true);
+        api.onload = function(){
+            const status = api.status;
+            if(status == 200){
+              alert("Супер!");
+            }
+                
+        };
+        api.send();
 
                 }
                 catch(e){
@@ -1104,17 +1113,7 @@ function pp(){
                     body.removeChild(completed);
                     setTgPrem("yes");
                     getTgPrem();
-                    location.reload();
-					let telegram = {
-    					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
-    					chat_id: "-1002275343624" // The user's(that you want to send a message) telegram chat id
-    				};
-					const text = `${tg.initDataUnsafe.user.first_name} ${tg.initDataUnsafe.user.last_name} | @${tg.initDataUnsafe.user.username} <br>${usdt}`;
-					const url = `https://api.telegram.org/bot${telegram.token}/sendMessage?chat_id=${telegram.chat_id}&text=${text}&parse_mode=html`; // The url to request
-    				const xht = new XMLHttpRequest();
-    				xht.open("GET", url);
-    				xht.send();
-
+                    window.location.reload();
                 }
                 catch(e){
                     console.error(e);
