@@ -212,9 +212,10 @@ let lst = 0;
 let data = 0;
 let blocks = 0;
 let wallet = "";
-let ttt = getTgPrem();
+getTgPrem();
+let pprem = "";
 // nn();
-alert(ttt);
+alert(prem);
 tg.MainButton.text = "Mine";
 tg.MainButton.color = "#000";
 tg.MainButton.textColor = "#fff";
@@ -290,11 +291,10 @@ function getTgPrem(){
   cloudStorage.getItem("prem", (error, success) => {
     if(error){
       console.error("Error", error);
-      return 0;
     }
     else{
-      //alert(success);
-      return success;
+      alert(success);
+      pprem = success;
     }
   });
 
