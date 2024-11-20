@@ -286,12 +286,13 @@ function setTgPrem(prem){
 }
 function getTgPrem(){
   cloudStorage = tg.CloudStorage; 
-  let active = cloudStorage.getItem("prem", (error, success) => {
+  let active = "";
+  cloudStorage.getItem("prem", (error, success) => {
     if(error){
       console.error("Error", error);
     }
     else{
-      console.log(success);
+      active = success;//console.log(success);
     }
   });
   return active;
