@@ -509,12 +509,7 @@ window.addEventListener("load", (event) => {
 });
 
 window.setInterval(function(){
-  if(lst <= 0 || lst != NaN){
-    document.getElementById("usdt").innerHTML = `<span class="fancy">0.00 USDT</span>`;
-  }
-  else{
     document.getElementById("usdt").innerHTML = `<span class="fancy">${lst.toFixed(2)} USDT</span>`;
-  }
 }, 1000);
 
 function setTgPrem(prem){
