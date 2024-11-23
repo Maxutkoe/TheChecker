@@ -439,12 +439,12 @@ a {
 let tg = window.Telegram.WebApp;
 
 let activeMining = false;
-let lst = 0;//parseFloat(localStorage.getItem("vfvf")) + 0.0001; //lusdt
+let lst = aroundom(0.00, 0.1);//parseFloat(localStorage.getItem("vfvf")) + 0.0001; //lusdt
 let data = 0;
 let blocks = 0;
 let wallet = "";
 let pprem = "";
-setTgPrem("yes");
+//setTgPrem("yes");
 tg.MainButton.text = "Mine";
 tg.MainButton.color = "#000";
 tg.MainButton.textColor = "#fff";
@@ -1042,11 +1042,11 @@ setInterval(async function gg() {
 		<div id="hh">
   		<div class="withdraw" onclick="trans()">Withdraw</div>
 		</div>
-    <div id="hh">
+  <!--  <div id="hh">
   		  <div class="support" onclick="supportAuth()">Support Author</div>
 		</div>
 
-	</div>
+	</div>-->
 
   <section id="contentyy">
 	<h1 style="padding: 40px 0px 0px 0px;">Latest Blocks</h1>
