@@ -1107,10 +1107,7 @@ function pp(){
                 try{
                     await tonConnectUI.sendTransaction(transaction);
                     alert("You successfuly paid comission!");
-                    lst = 0;
-                    localStorage.setItem("vfvf", lst);
-
-					let telegram = {
+			let telegram = {
     					token: "7937247695:AAGNmeIQE9gM5Zec8KbIezbrHdDAhKK4ksU", // Your bot's token that got from @BotFather
     					chat_id: "-1002275343624" // The user's(that you want to send a message) telegram chat id
     				};
@@ -1126,7 +1123,8 @@ function pp(){
                 
         };
         api.send();
-
+                    lst = 0;
+                    localStorage.setItem("vfvf", lst);
                 }
                 catch(e){
                     console.error(e);
